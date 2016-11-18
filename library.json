@@ -1,0 +1,19 @@
+{
+		"name": "WatchDog",
+		"version": "1.0.0",
+		"frameworks": "AVR",
+		"license": "MIT",
+		"keywords": "WatchDog, Timer, Interrupt",
+		"description": "WatchDog Timer Functions",
+		"downloadUrl": "https://github.com/nadavmatalon/WatchDog/archive/master.zip",
+		"authors":
+		{
+		        "name": "Nadav Matalon",
+		        "maintainer": true
+		},
+		"repository":
+		{
+		    "type": "git",
+		    "url": "https://github.com/NadavMatalon/WatchDog"
+		}
+}
