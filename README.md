@@ -3,7 +3,7 @@
 
 [![Platform Badge](https://img.shields.io/badge/platform-Arduino-orange.svg)](https://www.arduino.cc/)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-[![SemVer](https://img.shields.io/badge/SemVer-1.0.0-brightgreen.svg)](http://semver.org/)
+[![SemVer](https://img.shields.io/badge/SemVer-1.1.0-brightgreen.svg)](http://semver.org/)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -17,7 +17,7 @@ Importantly, behind the scenes, the 'reset' capabilities of the WatchDog timer a
 
 It is also worth mentioning that in order to keep the memory footprint of the library to a minimum, no objects are instantiated during its operation and only one variable is stored in the system (namely: the timer's selected overflow period).
 
-For more details about the WatchDog Timer, see the [ATmega328P DATASHEET](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_datasheet.pdf)
+For more details about the WatchDog Timer, see the [ATmega328P Datasheet](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_datasheet.pdf)
 
 ## Repository Contents
 
@@ -36,13 +36,17 @@ For more details about the WatchDog Timer, see the [ATmega328P DATASHEET](http:/
 
 ## GENERAL NOTES
 
-1) __Conflict with Delay()__
+1) __Conflict with Arduino's Delay Functions__
 
 Like any other time-dependant element, use of [delay()](https://www.arduino.cc/en/Reference/Delay), [delayMicroseconds()](https://www.arduino.cc/en/Reference/DelayMicroseconds) and the like is fundamentally incompatible with the normal, on-going operation of the WatchDog Timer and should therefore be avoided (apart from minimal and necessay exceptions where the cost in terms of time-keeping accuracy can be reasonably tolerated).
 
-2) __Limited Speed & Accuracy__
+2) __Timer's Limited Speed & Accuracy__
 
 Although the WatchDog Timer, as operated by the current library, may have noumerous potential applications, its speed and accuracy are relatively limited and therefore it is not advisable to use this Timer for ultra-fast, time-critical missions.
+
+3) __User-Defined Overflow Period__
+
+The library ebables users to select a pre-defined overflow period lengths based on one of the WatchDog Timer's base pre-scaler values, or alternatively, to define a custom length overflow period. With regard to the latter, it is important to note that the custom length period (in mS) must consist of a value that is evenly divisible by at least one of the said pre-scaler base values. For example, a custom period of 750mS is valid as it is divisible by the base pre-scaler value 250mS without a reminder. However, a custom period of 117mS is invalid as it cannot be divided by any of the pre-scaler base values without a reminder. In this context, the user can use the WatchDog::checkPeriod() function in order to see if a custom value is indeed valid or not.
 
 
 ## LIBRARY INSTALLATION & SETUP
@@ -63,15 +67,16 @@ With the library installed & included in the sketch, the following functions can
 ## LIBRARY FUNCTIONS
 
 __init();__  
-Parameters:&nbsp;&nbsp;&nbsp;ISR_function_name, ovf_period_t (2nd argument is optional)    
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1) Note that there are no parenthases follwing the ISR_function_name  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2) ovf_period_t params: OVF_16MS   / OVF_32MS   / OVF_64MS   / OVF_125MS  / OVF_250MS / OVF_500MS  / OVF_1000MS / OVF_2000MS / OVF_4000MS / OVF_8000MS  
-Description:&nbsp;&nbsp;&nbsp;Initializes the WatchDog timer with a user-defined ISR function name and (optionally) overflow period [default: 1000mS]. Place this function in the setup() section of the sketch. Note that this function also automatically starts the WatchDog Timer.  
+Parameters:&nbsp;&nbsp;&nbsp;ISR_function_name, ovf_period_t (optional), ovf_status_t or unsigned int (optional, must be a valid value) 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1) Note that there are no parentheses follwing the ISR_function_name  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2) ovf_period_t params (optional): OVF_16MS   / OVF_32MS   / OVF_64MS   / OVF_125MS  / OVF_250MS / OVF_500MS  / OVF_1000MS [default] / OVF_2000MS / OVF_4000MS / OVF_8000MS or user-defined custom overflow period (value must be divisible by one of the WatchDog Timer's base pre-scaler values (i.e. 16 / 32 / 64 / 125 / etc.)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3) ovf_status_t params (optional): START [default] / STOP (determines whether the WatchDog Timer automatically starts running or not after the overflow period is set.  
+Description:&nbsp;&nbsp;&nbsp;Initializes the WatchDog timer with a user-defined ISR function name and (optionally) overflow period [default: 1000mS] and (also optionally) start or stop status. Place this function in the setup() section of the sketch.   
 Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None  
 
 __start();__  
 Parameters:&nbsp;&nbsp;&nbsp;None  
-Description:&nbsp;&nbsp;&nbsp;Starts the WatchDog Timer (or Se-starts it if the timer was previously stopped).  
+Description:&nbsp;&nbsp;&nbsp;Starts the WatchDog Timer (or Se-starts the latter if it was previously stopped).  
 Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None 
 
 __stop();__  
@@ -86,19 +91,25 @@ Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;byte
 
 __getPeriod();__  
 Parameters:&nbsp;&nbsp;&nbsp;None  
-Description:&nbsp;&nbsp;&nbsp;Gets the current overflow period of the WatchDog Timer (in mS).   
-Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int     
+Description:&nbsp;&nbsp;&nbsp;Gets the current overflow period of the WatchDog Timer (in mS). Returns 0 if period has not been defined (e.g. prior to initialization or if an attempt was made to define the overflow period with an invalid value.   
+Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int   
 
 __setPeriod();__  
-Parameters:&nbsp;&nbsp;&nbsp;ovf_period_t (OVF_16MS / OVF_32MS / OVF_64MS / OVF_125MS / OVF_250MS / OVF_500MS  / OVF_1000MS / OVF_2000MS / OVF_4000MS / OVF_8000MS)  
+Parameters:&nbsp;&nbsp;&nbsp;ovf_period_t (OVF_16MS / OVF_32MS / OVF_64MS / OVF_125MS / OVF_250MS / OVF_500MS  / OVF_1000MS / OVF_2000MS / OVF_4000MS / OVF_8000MS) or unsigned int (optional, must be a valid value)
 Description:&nbsp;&nbsp;&nbsp;Sets the current overflow period of the WatchDog Timer.  
 Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None     
+
+__checkPeriod();__  
+Parameters:&nbsp;&nbsp;&nbsp;unsigned int  
+Description:&nbsp;&nbsp;&nbsp;Determines if a custom value for the WatchDog Timer's overflow period is valid (0 = invalid / 1 = valid) 
+Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;byte     
+
 
 ## RUNNING THE EXAMPLE SKETCH
 
 1) Start the Arduino IDE and open the example sketch  
 2) Upload the sketch to the Arduino  
-3) Open the Serial Communications Window (make sure the baud-rate is set to 9600 or change it in the sketch to match your Serial Port's buad-rate) amd follow the on-screen instructions  
+3) Open the Serial Communications Window (make sure the baud-rate is set to 9600 or change it in the sketch to match your Serial Port's buad-rate) and follow the on-screen instructions  
 
 ## BUG REPORTS
 
@@ -106,11 +117,10 @@ Please report any issues/bugs/suggestions at the [Issues](https://github.com/nad
 
 ## TODO
 
-- Add functions for setting user-defined custom overflow period
-
 ## VERSION HISTORY
 
 __Ver. 1.0.0__ - First release (17.11.16)  
+__Ver. 1.1.0__ - Added user-definible overflow period (18.11.16)  
 
 ## LICENSE
 

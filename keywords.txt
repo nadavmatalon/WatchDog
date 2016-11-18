@@ -22,6 +22,7 @@ stop	KEYWORD2
 status	KEYWORD2
 getPeriod	KEYWORD2
 setPeriod	KEYWORD2
+checkPeriod	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
@@ -37,9 +38,12 @@ OVF_1000MS	LITERAL1
 OVF_2000MS	LITERAL1
 OVF_4000MS	LITERAL1
 OVF_8000MS	LITERAL1
+START	LITERAL1
+STOP	LITERAL1
 
 #######################################
 # Built-In Variables (LITERAL2)
 #######################################
 
 ovf_period_t	LITERAL2
+ovf_status_t	LITERAL2
