@@ -17,7 +17,7 @@ Importantly, behind the scenes, the 'reset' capabilities of the WatchDog timer a
 
 It is also worth mentioning that in order to keep the memory footprint of the library to a minimum, no objects are instantiated during its operation and only one variable is stored in the system (namely: the timer's selected overflow period).
 
-For more details about the WatchDog Timer, see the [ATmega328P DATASHEET](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_datasheet.pdf)
+For more details about the WatchDog Timer, see the [ATmega328P Datasheet](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_datasheet.pdf)
 
 ## Repository Contents
 
@@ -36,11 +36,11 @@ For more details about the WatchDog Timer, see the [ATmega328P DATASHEET](http:/
 
 ## GENERAL NOTES
 
-1) __Conflict with Delay()__
+1) __Conflict with Arduino's Delay Functions__
 
 Like any other time-dependant element, use of [delay()](https://www.arduino.cc/en/Reference/Delay), [delayMicroseconds()](https://www.arduino.cc/en/Reference/DelayMicroseconds) and the like is fundamentally incompatible with the normal, on-going operation of the WatchDog Timer and should therefore be avoided (apart from minimal and necessay exceptions where the cost in terms of time-keeping accuracy can be reasonably tolerated).
 
-2) __Limited Speed & Accuracy__
+2) __Timer's Limited Speed & Accuracy__
 
 Although the WatchDog Timer, as operated by the current library, may have noumerous potential applications, its speed and accuracy are relatively limited and therefore it is not advisable to use this Timer for ultra-fast, time-critical missions.
 
