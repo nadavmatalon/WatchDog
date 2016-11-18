@@ -86,7 +86,7 @@ Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;byte
 
 __getPeriod();__  
 Parameters:&nbsp;&nbsp;&nbsp;None  
-Description:&nbsp;&nbsp;&nbsp;Gets the current overflow period of the WatchDog Timer (16 = OVF_16MS / 32 = OVF_32MS / 64 = OVF_64MS / 125 = OVF_125MS / 250 = OVF_250MS / 500 = OVF_500MS / 1000 = OVF_1000MS / 2000 = OVF_2000MS / 4000 = OVF_4000MS / 8000 = OVF_8000MS).    
+Description:&nbsp;&nbsp;&nbsp;Gets the current overflow period of the WatchDog Timer (in mS).   
 Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int     
 
 __setPeriod();__  
