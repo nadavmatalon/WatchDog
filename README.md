@@ -106,9 +106,11 @@ Please report any issues/bugs/suggestions at the [Issues](https://github.com/nad
 
 ## TODO
 
+- Add custom user-defined overflow period functionality
+
 ## VERSION HISTORY
 
-__Ver. 1.0.0__ - First release (16.11.16)  
+__Ver. 1.0.0__ - First release (17.11.16)  
 
 ## LICENSE
 
