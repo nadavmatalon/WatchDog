@@ -7,6 +7,7 @@
     WatchDog Timer Functions
 
     Ver. 1.0.0 - First release (17.11.16)
+    Ver. 1.1.0 - Added user-definible overflow period (18.11.16)
 
  *===============================================================================================================*
     INTRODUCTION
@@ -112,6 +113,7 @@ namespace Watchdog {
             static unsigned int getPeriod();
             static void setPeriod(ovf_period_t newPeriod);
             static void setPeriod(unsigned int customPeriod);
+            static byte checkPeriod(unsigned int periodValue);
             void   attachInterrupt(void (*isr)());
             void   attachInterrupt(void (*isr)(), ovf_period_t selectedPeriod);
             static void (*isrCallback)();

@@ -22,6 +22,7 @@ stop	KEYWORD2
 status	KEYWORD2
 getPeriod	KEYWORD2
 setPeriod	KEYWORD2
+checkPeriod	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

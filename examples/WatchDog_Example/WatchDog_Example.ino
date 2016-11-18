@@ -108,7 +108,7 @@ void loop() {
             Serial.print(F("\n\nwatchdog overflow period set to: 1000mS\n\n"));
         } else if ((cmd == 'm') || (cmd == 'M')) {
             printMenu();
-       }
+        }
     }
 }
   
