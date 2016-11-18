@@ -6,7 +6,7 @@
 
     WatchDog Timer Functionality
 
-    Ver. 1.0.0 - First release (16.11.16)
+    Ver. 1.0.0 - First release (17.11.16)
 
  *==============================================================================================================*
     LICENSE
@@ -38,9 +38,9 @@ __asm volatile ("nop");
 
 #include "WatchDog.h"
 
-WatchDog Wdog1;                                             // preinstatiate
+WatchDog Wdog1;                                                 // preinstatiate for watcdog ISR function
 
-ovf_period_t WatchDog::ovfPeriod;
+ovf_period_t WatchDog::ovfPeriod;                               // class variable for storing selected ovf period
 
 /*==============================================================================================================*
     INITIALIZE
@@ -117,7 +117,6 @@ unsigned int WatchDog::getPeriod() {
     SET WATCHDOG OVERFLOW PERIOD
     //  PARAMS: OVF_16MS   / OVF_32MS   / OVF_64MS   / OVF_125MS  / OVF_250MS /
     //          OVF_500MS  / OVF_1000MS / OVF_2000MS / OVF_4000MS / OVF_8000MS
-
  *==============================================================================================================*/
 
 void WatchDog::setPeriod(ovf_period_t newPeriod) {
@@ -149,4 +148,3 @@ ISR(WDT_vect) {
     Wdog1.isrCallback();
     bitSet(MCUSR, WDIF);                                            // clear Watchdog Timer Interrupt Flag
 }
-

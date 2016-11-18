@@ -106,7 +106,7 @@ Please report any issues/bugs/suggestions at the [Issues](https://github.com/nad
 
 ## TODO
 
-- Add custom user-defined overflow period functionality
+- Add functions for setting user-defined custom overflow period
 
 ## VERSION HISTORY
 
