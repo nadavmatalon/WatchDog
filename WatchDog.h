@@ -12,7 +12,16 @@
     INTRODUCTION
  *===============================================================================================================*
 
-    
+ Many AVR's include an 'Enhanced Watchdog Timer' (WDT) which runs independently on a separate on-chip 128KHz oscilliator. The Watchdog Timer is typically used for pre-defined system reset duties (i.e. as a fail-safe or protection mechanism against system crashes). However, given that it has its own interrupt vector, the WatchDog Timer may also be used as a regular (albeit relatively restricted) time counter for managing a user-defined Interrupt Service Routine (ISR).
+ 
+ Taking advantage of the above characteristics of the WatchDog Timer, the present light-weight library contains a small collection of functions for controlling this Timer in its capacity as an interrupt generator. In other words, the user can select the overflow period (in mS) of the timer, as well as compose the content of the ISR (Interrupt Service Routine) which is set to run on each overflow event (e.g. getting a sensor reading every 500mS or blinking a LED at the rate of once per second).
+ 
+ Importantly, behind the scenes, the 'reset' capabilities of the WatchDog timer are entirely disabled by the library, leaving only the overflow time-counting mechanism and corresponding interrupt service routine to run as they normally do. Hence, no system reset is preformed when using any of the library's functions.
+ 
+ It is also worth mentioning that in order to keep the memory footprint of the library to a minimum, no objects are instantiated during its operation and only one variable is stored in the system (namely: the timer's selected overflow period).
+ 
+ For more details about the WatchDog Timer, see the ATmega328P Datasheet(http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_datasheet.pdf)
+
  *===============================================================================================================*
     BUG REPORTS
  *===============================================================================================================*
@@ -94,4 +103,3 @@ using namespace Watchdog;
 extern WatchDog Wdog1;
 
 #endif
-   //  B   //  B    0        1         0         0        0        0          0          0
