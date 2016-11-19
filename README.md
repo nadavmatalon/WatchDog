@@ -67,10 +67,10 @@ With the library installed & included in the sketch, the following functions can
 ## LIBRARY FUNCTIONS
 
 __init();__  
-Parameters:&nbsp;&nbsp;&nbsp;ISR_function_name, ovf_period_t (optional), ovf_status_t or unsigned int (optional, but must be a valid value)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1) Note that there are no parentheses follwing the ISR_function_name  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2) ovf_period_t params (optional): OVF_16MS   / OVF_32MS   / OVF_64MS   / OVF_125MS  / OVF_250MS / OVF_500MS  / OVF_1000MS [default] / OVF_2000MS / OVF_4000MS / OVF_8000MS or user-defined custom overflow period (value must be divisible by one of the WatchDog Timer's base pre-scaler values (i.e. 16 / 32 / 64 / 125 / etc.)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3) ovf_status_t params (optional): START [default] / STOP (determines whether the WatchDog Timer automatically starts running or not after the overflow period is set.  
+Parameters:&nbsp;&nbsp;&nbsp;ISR_function_name, ovf_period_t (optional), ovf_status_t or unsigned int (optional, but must be a valid value). Points to note:    
+1) There are no parentheses follwing the ISR_function_name  
+2) ovf_period_t params (optional): OVF_16MS   / OVF_32MS   / OVF_64MS   / OVF_125MS  / OVF_250MS / OVF_500MS  / OVF_1000MS [default] / OVF_2000MS / OVF_4000MS / OVF_8000MS or user-defined custom overflow period (value must be divisible by one of the WatchDog Timer's base pre-scaler values (i.e. 16 / 32 / 64 / 125 / etc.)  
+3) ovf_status_t params (optional): START [default] / STOP (determines whether the WatchDog Timer automatically starts running or not after the overflow period is set.  
 Description:&nbsp;&nbsp;&nbsp;Initializes the WatchDog timer with a user-defined ISR function name and (optionally) overflow period [default: 1000mS] and (also optionally) start or stop status. Place this function in the setup() section of the sketch.   
 Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None  
 
