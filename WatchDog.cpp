@@ -174,7 +174,7 @@ unsigned int WatchDog::getPeriod() {
 }
 
 /*===================================================================================================================================*
-    SET WATCHDOG OVERFLOW PERIOD (PREDEFINED VALUE, in mS)
+    SET WATCHDOG OVERFLOW PERIOD (PRE-DEFINED VALUE, in mS)
     //  PARAMS: OVF_16MS   / OVF_32MS   / OVF_64MS   / OVF_125MS  / OVF_250MS /
     //          OVF_500MS  / OVF_1000MS / OVF_2000MS / OVF_4000MS / OVF_8000MS
  *===================================================================================================================================*/
