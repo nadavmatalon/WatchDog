@@ -127,7 +127,7 @@ void WatchDog::init(void (*isrFunc)(), unsigned int CustomPeriod, ovf_status_t O
 
 void WatchDog::start() {
     noInterrupts();                                                         // disable global interrupts (cli);
-        bitClear(MCUSR, WDRF);                                              // Clear WDRF in MCUSR
+        bitClear(MCUSR, WDRF);                                              // Clear WDRF to enable clearing of WDE;
         WDTCSR = (1 << WDCE) | (1 << WDE);                                  // enter watchdog timer configuration mode
         WDTCSR = WatchDog::ovfPeriod;                                       // turn on WatchDog timer
     interrupts();                                                           // enable global interrupts (sei);
@@ -139,7 +139,7 @@ void WatchDog::start() {
 
 void WatchDog::stop() {
     noInterrupts();                                                         // disable global interrupts (cli);
-        bitClear(MCUSR, WDRF);                                              // Clear WDRF in MCUSR
+        bitClear(MCUSR, WDRF);                                              // Clear WDRF to enable clearing of WDE;
         WDTCSR = (1 << WDCE) | (1 << WDE);                                  // enter watchdog timer configuration mode
         WDTCSR = 0;                                                         // turn off WatchDog timer
     interrupts();                                                           // enable global interrupts (sei);
