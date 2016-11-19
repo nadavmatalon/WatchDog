@@ -173,8 +173,6 @@ unsigned int WatchDog::getPeriod() {
     }
 }
 
-// change top to quatient everywhere
-
 /*===================================================================================================================================*
     SET WATCHDOG OVERFLOW PERIOD (PREDEFINED VALUE, in mS)
     //  PARAMS: OVF_16MS   / OVF_32MS   / OVF_64MS   / OVF_125MS  / OVF_250MS /
