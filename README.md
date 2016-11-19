@@ -61,12 +61,12 @@ Next, include the library at the top of the sketch as follows:
 
 With the library installed & included in the sketch, the following functions can be used directly to manage the WatchDog Timer:
 
->Note that using these function requires preceding them with the library name (see the [usage example](https://github.com/nadavmatalon/WatchDog/blob/master/examples/WatchDog_Example/WatchDog_Example.ino) sketch for a more detailed implementation):
+>Note that using these functions requires preceding them with the library name (see the [usage example](https://github.com/nadavmatalon/WatchDog/blob/master/examples/WatchDog_Example/WatchDog_Example.ino) sketch for a more detailed implementation):
 
 
 ## LIBRARY FUNCTIONS
 
-__init();__  
+__WatchDog::init();__  
 Parameters:&nbsp;&nbsp;&nbsp;ISR_function_name, ovf_period_t (optional), ovf_status_t or unsigned int (optional, but must be a valid value). Points to note:    
 1) There are no parentheses follwing the ISR_function_name  
 2) ovf_period_t params (optional): OVF_16MS   / OVF_32MS   / OVF_64MS   / OVF_125MS  / OVF_250MS / OVF_500MS  / OVF_1000MS [default] / OVF_2000MS / OVF_4000MS / OVF_8000MS or user-defined custom overflow period (value must be divisible by one of the WatchDog Timer's base pre-scaler values (i.e. 16 / 32 / 64 / 125 / etc.)  
@@ -74,32 +74,32 @@ Parameters:&nbsp;&nbsp;&nbsp;ISR_function_name, ovf_period_t (optional), ovf_sta
 Description:&nbsp;&nbsp;&nbsp;Initializes the WatchDog timer with a user-defined ISR function name and (optionally) overflow period [default: 1000mS] and (also optionally) start or stop status. Place this function in the setup() section of the sketch.   
 Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None  
 
-__start();__  
+__WatchDog::start();__  
 Parameters:&nbsp;&nbsp;&nbsp;None  
 Description:&nbsp;&nbsp;&nbsp;Starts the WatchDog Timer (or Se-starts the latter if it was previously stopped).  
 Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None 
 
-__stop();__  
+__WatchDog::stop();__  
 Parameters:&nbsp;&nbsp;&nbsp;None  
 Description:&nbsp;&nbsp;&nbsp;Stops the WatchDog Timer.  
 Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None 
 
-__status();__  
+__WatchDog::status();__  
 Parameters:&nbsp;&nbsp;&nbsp;None  
 Description:&nbsp;&nbsp;&nbsp;Gets the current status of the WatchDog Timer (0 = Stopped / 1 = Running).  
 Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;byte   
 
-__getPeriod();__  
+__WatchDog::getPeriod();__  
 Parameters:&nbsp;&nbsp;&nbsp;None  
 Description:&nbsp;&nbsp;&nbsp;Gets the current overflow period of the WatchDog Timer (in mS). Returns 0 if period has not been defined (e.g. prior to initialization or if an attempt was made to define the overflow period with an invalid value.   
 Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int   
 
-__setPeriod();__  
+__WatchDog::setPeriod();__  
 Parameters:&nbsp;&nbsp;&nbsp;ovf_period_t (OVF_16MS / OVF_32MS / OVF_64MS / OVF_125MS / OVF_250MS / OVF_500MS  / OVF_1000MS / OVF_2000MS / OVF_4000MS / OVF_8000MS) or unsigned int (optional, must be a valid value)
 Description:&nbsp;&nbsp;&nbsp;Sets the current overflow period of the WatchDog Timer.  
 Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None     
 
-__checkPeriod();__  
+__WatchDog::checkPeriod();__  
 Parameters:&nbsp;&nbsp;&nbsp;unsigned int  
 Description:&nbsp;&nbsp;&nbsp;Determines if a custom value for the WatchDog Timer's overflow period is valid (0 = invalid / 1 = valid) 
 Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;byte     
