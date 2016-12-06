@@ -9,7 +9,7 @@
 
 ## INTRODUCTION
 
-Many AVR's include an 'Enhanced Watchdog Timer' (WDT) which runs independently on a separate on-chip 128KHz oscilliator. The Watchdog Timer is typically used for pre-defined system reset duties (i.e. as a fail-safe or protection mechanism against system crashes). However, given that it has its own interrupt vector, the WatchDog Timer may also be used as a regular (albeit relatively restricted) time counter for managing a user-defined Interrupt Service Routine (ISR).
+Many AVR's containn an 'Enhanced Watchdog Timer' (WDT) which runs independently on a separate on-chip 128KHz oscilliator. The Watchdog Timer is typically used for pre-defined system reset duties (i.e. as a fail-safe or protection mechanism against system crashes). However, given that it has its own interrupt vector, the WatchDog Timer may also be used as a regular (albeit relatively restricted) time counter for managing a user-defined Interrupt Service Routine (ISR).
 
 Taking advantage of the above characteristics of the WatchDog Timer, the present light-weight library contains a small collection of functions for controlling this Timer in its capacity as an interrupt generator. In other words, the user can select the overflow period (in mS) of the timer, as well as compose the content of the ISR (Interrupt Service Routine) which is set to run on each overflow event (e.g. getting a sensor reading every 500mS or blinking a LED at the rate of once per second).
 
@@ -63,13 +63,14 @@ Next, include the library at the top of the sketch as follows:
 
 With the library installed & included in the sketch, the following functions can be used directly to manage the WatchDog Timer:
 
->Note that using these functions requires preceding them with the library name (see the [usage example](https://github.com/nadavmatalon/WatchDog/blob/master/examples/WatchDog_Example/WatchDog_Example.ino) sketch for a more detailed implementation):
+>Note that using these functions requires preceding them with the library name (see the [usage examples](https://github.com/nadavmatalon/WatchDog/blob/master/examples) for a more detailed implementation):
 
 
 ## LIBRARY FUNCTIONS
 
 __WatchDog::init();__  
-Parameters:&nbsp;&nbsp;&nbsp;ISR_function_name, ovf_period_t (optional), ovf_status_t or unsigned int (optional, but must be a valid value). Points to note:    
+Parameters:&nbsp;&nbsp;&nbsp;ISR_function_name, ovf_period_t (optional), ovf_status_t or unsigned int (optional, but must be a valid value).  
+Points to note in this context:  
 1) There are no parentheses follwing the ISR_function_name  
 2) ovf_period_t params (optional): OVF_16MS   / OVF_32MS   / OVF_64MS   / OVF_125MS  / OVF_250MS / OVF_500MS  / OVF_1000MS [default] / OVF_2000MS / OVF_4000MS / OVF_8000MS or user-defined custom overflow period (value must be divisible by one of the WatchDog Timer's base pre-scaler values (i.e. 16 / 32 / 64 / 125 / etc.)  
 3) ovf_status_t params (optional): START [default] / STOP (determines whether the WatchDog Timer automatically starts running or not after the overflow period is set.  
@@ -103,15 +104,16 @@ Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None
 
 __WatchDog::checkPeriod();__  
 Parameters:&nbsp;&nbsp;&nbsp;unsigned int  
-Description:&nbsp;&nbsp;&nbsp;Determines if a custom value for the WatchDog Timer's overflow period is valid (0 = invalid / 1 = valid) 
+Description:&nbsp;&nbsp;&nbsp;Determines if a custom value for the WatchDog Timer's overflow period is valid (0 = invalid / 1 = valid)   
 Returns:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;byte     
 
 
-## RUNNING THE EXAMPLE SKETCH
+## RUNNING THE EXAMPLE SKETCHES
 
-1) Start the Arduino IDE and open the example sketch  
+1) Start the Arduino IDE and open the relevant example sketch  
 2) Upload the sketch to the Arduino  
-3) Open the Serial Communications Window (make sure the baud-rate is set to 9600 or change it in the sketch to match your Serial Port's buad-rate) and follow the on-screen instructions  
+3) For the ATtiny84/ATiny841 which don't have built-in serial communication, Connect an LED to the relevant pin with an approprite resistor.  
+4) For the Arduino Uno, open the Serial Communications Window (make sure the baud-rate is set to 9600 or change it in the sketch to match your Serial Port's buad-rate) and follow the on-screen instructions  
 
 ## BUG REPORTS
 
