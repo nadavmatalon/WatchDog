@@ -3,7 +3,7 @@
 
 [![Platform Badge](https://img.shields.io/badge/platform-Arduino-orange.svg)](https://www.arduino.cc/)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-[![SemVer](https://img.shields.io/badge/SemVer-1.1.0-brightgreen.svg)](http://semver.org/)
+[![SemVer](https://img.shields.io/badge/SemVer-1.2.0-brightgreen.svg)](http://semver.org/)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -17,15 +17,17 @@ Importantly, behind the scenes, the 'reset' capabilities of the WatchDog timer a
 
 It is also worth mentioning that in order to keep the memory footprint of the library to a minimum, no objects are instantiated during its operation and only one variable is stored in the system (namely: the timer's selected overflow period).
 
-For more details about the WatchDog Timer, see the [ATmega328P Datasheet](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_datasheet.pdf)
+For more details about the WatchDog Timer, see the relevant datasheet
 
 ## Repository Contents
 
 - **WatchDog.h** - Library Header file.  
 - **WatchDog.cpp** - Library Compilation file.  
 - **/examples**   
-  - **/WatchDog_Example**  
-    - **WatchDog_Example.ino** - illustration code for using the WatchDog Timer library.  
+  - **/WatchDog_Uno_Example**  
+    - **WatchDog_Uno_Example.ino** - illustration code for using the WatchDog Timer library running on an Arduino Uno with a user-interface via the Serial Monitor.  
+  - **/WatchDog_ATtiny84x_Example**  
+    - **WatchDog_ATtiny84x_Example.ino** - illustration code for using the WatchDog Timer library running on an ATtiny441/841 or an ATtiny84A with feedback via a blinking LED.  
 - **/extras**
   - **License.txt** - A cope of the end-user license agreement.  
 - **keywords.txt** - Keywords for this library which will be highlighted in sketches within the Arduino IDE.  
@@ -121,6 +123,7 @@ Please report any issues/bugs/suggestions at the [Issues](https://github.com/nad
 
 __Ver. 1.0.0__ - First release (17.11.16)  
 __Ver. 1.1.0__ - Added user-definible overflow period (18.11.16)  
+__Ver. 1.2.0__ - Added support for ATtiny441/841 (5.12.16)
 
 ## LICENSE
 

@@ -8,7 +8,8 @@
 
     Ver. 1.0.0 - First release (17.11.16)
     Ver. 1.1.0 - Added user-definible overflow period (18.11.16)
-
+    Ver. 1.2.0 - Added support for ATtiny441/841 (5.12.16)
+ 
  *===============================================================================================================*
     INTRODUCTION
  *===============================================================================================================*
@@ -74,7 +75,7 @@ __asm volatile ("nop");
 #define WatchDog_h
 
 #if !defined(ARDUINO_ARCH_AVR)
-#error “The WatchDog library only supports AVR processors.”
+#error The WatchDog library only supports AVR processors
 #endif
 
 #include <Arduino.h>

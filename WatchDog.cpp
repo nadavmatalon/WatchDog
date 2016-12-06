@@ -8,6 +8,7 @@
 
     Ver. 1.0.0 - First release (17.11.16)
     Ver. 1.1.0 - Added user-definible overflow period (18.11.16)
+    Ver. 1.2.0 - Added compatibility for ATtiny441/841 (5.12.16)
 
  *===================================================================================================================================*
     LICENSE
@@ -126,11 +127,19 @@ void WatchDog::init(void (*isrFunc)(), unsigned int CustomPeriod, ovf_status_t O
  *===================================================================================================================================*/
 
 void WatchDog::start() {
-    noInterrupts();                                                         // disable global interrupts (cli);
-        bitClear(MCUSR, WDRF);                                              // Clear WDRF to enable clearing of WDE;
-        WDTCSR = (1 << WDCE) | (1 << WDE);                                  // enter watchdog timer configuration mode
+#if defined(__AVR_ATtiny841__)                                              // if using ATtiny841...
+    noInterrupts();                                                         // disable global interrupts (cli)
+        bitClear(MCUSR, WDRF);                                              // clear WDRF to enable clearing of WDE
+        CCP = 0xD8;                                                         // write 'change enable' signature to Config Change Protection register
         WDTCSR = WatchDog::ovfPeriod;                                       // turn on WatchDog timer
-    interrupts();                                                           // enable global interrupts (sei);
+    interrupts();                                                           // enable global interrupts (sei)
+#else                                                                       // for all other AVRs...
+    noInterrupts();                                                         // disable global interrupts (cli)
+        bitClear(MCUSR, WDRF);                                              // clear WDRF to enable clearing of WDE
+        WDTCSR = (1 << WDCE) | (1 << WDE);                                  // set relevant bits to enter watchdog timer configuration mode
+        WDTCSR = WatchDog::ovfPeriod;                                       // turn on WatchDog timer
+    interrupts();                                                           // enable global interrupts (sei)
+#endif
 }
 
 /*===================================================================================================================================*
@@ -138,11 +147,19 @@ void WatchDog::start() {
  *===================================================================================================================================*/
 
 void WatchDog::stop() {
-    noInterrupts();                                                         // disable global interrupts (cli);
-        bitClear(MCUSR, WDRF);                                              // Clear WDRF to enable clearing of WDE;
-        WDTCSR = (1 << WDCE) | (1 << WDE);                                  // enter watchdog timer configuration mode
+#if defined(__AVR_ATtiny841__)                                              // if using ATtiny841...
+    noInterrupts();                                                         // disable global interrupts (cli)
+        bitClear(MCUSR, WDRF);                                              // clear WDRF to enable clearing of WDE
+        CCP = 0xD8;                                                         // write 'change enable' signature to Config Change Protection register
         WDTCSR = 0;                                                         // turn off WatchDog timer
-    interrupts();                                                           // enable global interrupts (sei);
+    interrupts();                                                           // enable global interrupts (sei)
+#else                                                                       // for all other AVRs...
+    noInterrupts();                                                         // disable global interrupts (cli)
+        bitClear(MCUSR, WDRF);                                              // clear WDRF to enable clearing of WDE
+        WDTCSR = (1 << WDCE) | (1 << WDE);                                  // set relevant bits to enter watchdog timer configuration mode
+        WDTCSR = 0;                                                         // turn off WatchDog timer
+    interrupts();                                                           // enable global interrupts (sei)
+#endif
 }
 
 /*===================================================================================================================================*
@@ -180,8 +197,9 @@ unsigned int WatchDog::getPeriod() {
  *===================================================================================================================================*/
 
 void WatchDog::setPeriod(ovf_period_t newPeriod) {
+    byte status = WatchDog::status();
     WatchDog::ovfPeriod = newPeriod;                                        // update new overflow period value
-    WatchDog::status() ? WatchDog::start() : WatchDog::stop();              // start or stop timer based on state prior to change
+    status ? WatchDog::start() : WatchDog::stop();                          // start or stop timer based on state prior to change
 }
 
 /*===================================================================================================================================*

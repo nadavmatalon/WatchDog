@@ -1,6 +1,6 @@
 /* 
-    WATCHDOG LIBRARY - USAGE EXAMPLE
-    --------------------------------
+    WATCHDOG LIBRARY - ARDUINO UNO EXAMPLE
+    --------------------------------------
 
     INTRODUCTION
     ------------ 
@@ -26,6 +26,14 @@
 
     For more details about the WatchDog Timer, see the ATmega328P DATASHEET:
     http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_datasheet.pdf
+
+    HW SETUP & RUNNING EXAMPLE
+    --------------------------
+    There is no need for any external components in order to run this sketch as it uses the built-in LED on Pin 13 of
+    the Arduino.
+
+    To run this exmple, simply upload the sketch to the Arduino, open the Seria Monitor (set the baud-rate to 9600 if needed),
+    and follow the on-screen instructions.
 
     BUG REPORTS
     -----------
@@ -53,15 +61,17 @@
     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-
 #include "WatchDog.h"
 
+const byte LED_PIN = 13;
+
 int cmd;
+
 unsigned long timeNow = 0;
 
 void setup() {
     Serial.begin(9600);
-    pinMode(13, OUTPUT);
+    pinMode(LED_PIN, OUTPUT);
     WatchDog::init(blinkISR, 500);
     printMenu();
 }
@@ -113,7 +123,7 @@ void loop() {
 }
   
 void blinkISR() {                                         // watchdog timer interrupt service routine    
-    digitalWrite(13, !digitalRead(13));
+    digitalWrite(LED_PIN, !digitalRead(LED_PIN));
 }
 
 void printMenu() {
