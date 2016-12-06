@@ -19,7 +19,7 @@ It is also worth mentioning that in order to keep the memory footprint of the li
 
 For more details about the WatchDog Timer, see the relevant datasheet
 
-<img src="extras/images/watchdog_image.png" alt="WATCHDOG" width="350" height="240">
+<img src="extras/images/watchdog_image.png" alt="WATCHDOG" width="450" height="340">
 
 Source: [ATmega328P DATASHEET](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_datasheet.pdf)
 
