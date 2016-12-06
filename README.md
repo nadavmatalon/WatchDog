@@ -19,6 +19,10 @@ It is also worth mentioning that in order to keep the memory footprint of the li
 
 For more details about the WatchDog Timer, see the relevant datasheet
 
+<img src="extras/images/watchdog_image.png" alt="WATCHDOG" width="350" height="240">
+
+Source: [ATmega328P DATASHEET](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_datasheet.pdf)
+
 ## Repository Contents
 
 - **WatchDog.h** - Library Header file.  
@@ -30,6 +34,8 @@ For more details about the WatchDog Timer, see the relevant datasheet
     - **WatchDog_ATtiny84x_Example.ino** - illustration code for using the WatchDog Timer library running on an ATtiny441/841 or an ATtiny84A with feedback via a blinking LED.  
 - **/extras**
   - **License.txt** - A cope of the end-user license agreement.  
+  - **/images**
+    - **watchdog_image.png** - Functional diagram of AVR's' WatchDog Timer.
 - **keywords.txt** - Keywords for this library which will be highlighted in sketches within the Arduino IDE.  
 - **library.properties** - General library properties for the Arduino's IDE (>1.5) Library Package Manager.  
 - **README.md** - The readme file for this library.  
