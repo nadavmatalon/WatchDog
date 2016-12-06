@@ -17,7 +17,7 @@ Importantly, behind the scenes, the 'reset' capabilities of the WatchDog timer a
 
 It is also worth mentioning that in order to keep the memory footprint of the library to a minimum, no objects are instantiated during its operation and only one variable is stored in the system (namely: the timer's selected overflow period).
 
-For more details about the WatchDog Timer, see the relevant datasheet
+For more details about the WatchDog Timer, see the relevant datasheet.
 
 <img src="extras/images/watchdog_image.png" alt="WATCHDOG" width="450" height="340">
 
@@ -35,7 +35,7 @@ Source: [ATmega328P DATASHEET](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR
 - **/extras**
   - **License.txt** - A cope of the end-user license agreement.  
   - **/images**
-    - **watchdog_image.png** - Functional diagram of AVR's' WatchDog Timer.
+    - **watchdog_image.png** - Functional diagram of the AVR WatchDog Timer.
 - **keywords.txt** - Keywords for this library which will be highlighted in sketches within the Arduino IDE.  
 - **library.properties** - General library properties for the Arduino's IDE (>1.5) Library Package Manager.  
 - **README.md** - The readme file for this library.  
