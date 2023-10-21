@@ -50,7 +50,7 @@ Like any other time-dependant element, use of [delay()](https://www.arduino.cc/e
 
 2) __Timer's Limited Speed & Accuracy__
 
-Although the WatchDog Timer, as operated by the current library, may have noumerous potential applications, its speed and accuracy are relatively limited and therefore it is not advisable to use this Timer for ultra-fast, time-critical missions.
+Although the WatchDog Timer, as operated by the current library, may have numerous potential applications, its speed and accuracy are relatively limited and therefore it is not advisable to use this Timer for ultra-fast, time-critical missions.
 
 3) __User-Defined Overflow Period__
 
