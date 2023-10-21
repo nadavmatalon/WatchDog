@@ -54,7 +54,7 @@ Although the WatchDog Timer, as operated by the current library, may have noumer
 
 3) __User-Defined Overflow Period__
 
-The library ebables users to select a pre-defined overflow period lengths based on one of the WatchDog Timer's base pre-scaler values, or alternatively, to define a custom length overflow period. With regard to the latter, it is important to note that the custom length period (in mS) must consist of a value that is evenly divisible by at least one of the said pre-scaler base values. For example, a custom period of 750mS is valid as it is divisible by the base pre-scaler value 250mS without a reminder. However, a custom period of 117mS is invalid as it cannot be divided by any of the pre-scaler base values without a reminder. In this context, the user can use the WatchDog::checkPeriod() function in order to see if a custom value is indeed valid or not.
+The library enables users to select a pre-defined overflow period lengths based on one of the WatchDog Timer's base pre-scaler values, or alternatively, to define a custom length overflow period. With regard to the latter, it is important to note that the custom length period (in mS) must consist of a value that is evenly divisible by at least one of the said pre-scaler base values. For example, a custom period of 750mS is valid as it is divisible by the base pre-scaler value 250mS without a reminder. However, a custom period of 117mS is invalid as it cannot be divided by any of the pre-scaler base values without a reminder. In this context, the user can use the WatchDog::checkPeriod() function in order to see if a custom value is indeed valid or not.
 
 
 ## LIBRARY INSTALLATION & SETUP
